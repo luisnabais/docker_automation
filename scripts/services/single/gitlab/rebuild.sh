@@ -1,5 +1,5 @@
-CONTAINER_NAME=gitlab
-VERSION=$(docker container ls | grep $CONTAINER_NAME | awk {'print $2'} | cut -d':' -f2)
+CONTAINER_NAME=$(grep "^CONTAINER_NAME=" CONFIG | cut -d'=' -f2)
+VERSION=$(grep "^VERSION=" CONFIG | cut -d'=' -f2)
 
 echo "Stopping container..."
 docker container stop $CONTAINER_NAME

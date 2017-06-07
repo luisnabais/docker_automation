@@ -1,0 +1,5 @@
+VERSION=latest
+OLD_VERSION=
+IP=192.168.32.147
+CONTAINER_NAME=dashing
+IMAGE_NAME=frvi/dashing

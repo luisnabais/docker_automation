@@ -1,14 +1,13 @@
-NEW_VERSION=9.1.2-ce.0
-FULL_VERSION=gitlab/gitlab-ce:$NEW_VERSION
-CONTAINER_NAME=gitlab
-OLD_IMAGE=$(docker container ls | grep $CONTAINER_NAME | awk {'print $2'})
+NEW_VERSION=$(grep "^VERSION=" CONFIG | cut -d'=' -f2)
+OLD_VERSION=$(grep "^OLD_VERSION=" CONFIG | cut -d'=' -f2)
+IMAGE_NAME=$(grep "^IMAGE_NAME=" CONFIG | cut -d'=' -f2)
+CONTAINER_NAME=$(grep "^CONTAINER_NAME=" CONFIG | cut -d'=' -f2)
+NEW_IMAGE=$IMAGE_NAME:$NEW_VERSION
+OLD_IMAGE=$IMAGE_NAME:$OLD_VERSION
 
-if [ "$1" != "" ]; then
-    NEW_VERSION=$1
-fi
 
-echo "Getting Image ${FULL_VERSION}..."
-docker pull $FULL_VERSION
+echo "Getting Image ${NEW_IMAGE}..."
+docker pull $NEW_IMAGE
 echo ""
 
 echo "Stopping container..."
